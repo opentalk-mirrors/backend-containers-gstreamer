@@ -27,8 +27,8 @@ RUN git checkout $GSTREAMER_CHECKOUT
 
 RUN /pyenv/bin/meson setup /build/ \
     -Dprefix=/usr -Dlibdir=/usr/lib \
-    -Dgpl=enabled -Dgst-plugins-bad:va=enabled -Dvaapi=enabled  -Dwebrtc=enabled -Dlibav=enabled \
-    -Dlibnice=enabled -Dlibnice:gupnp=disabled \
+    -Dgpl=enabled -Dgst-plugins-bad:va=enabled -Dvaapi=enabled -Dwebrtc=enabled -Dlibav=enabled \
+    -Dlibnice=enabled -Dlibnice:gupnp=disabled -Dpython=disabled \
     -D optimization=3 -D b_lto=true
 
 WORKDIR /build
