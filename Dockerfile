@@ -13,7 +13,7 @@ RUN git clone $GSTREAMER_GIT
 RUN apt-get install -y \
     ninja-build python3-venv python3-pip \
     # Gstreamer
-    bison flex cmake nasm pkg-config libssl-dev \
+    bison flex cmake nasm pkg-config libssl-dev librtmp-dev \
     # VAAPI DRM
     libva-dev libdrm-dev libudev-dev
 
@@ -28,7 +28,7 @@ RUN git checkout $GSTREAMER_CHECKOUT
 RUN /pyenv/bin/meson setup /build/ \
     -Dprefix=/usr -Dlibdir=/usr/lib \
     -Dgpl=enabled -Dgst-plugins-bad:va=enabled -Dvaapi=enabled -Dwebrtc=enabled -Dlibav=enabled \
-    -Dlibnice=enabled -Dlibnice:gupnp=disabled -Dpython=disabled \
+    -Dlibnice=enabled -Dlibnice:gupnp=disabled -Dpython=disabled -Dgst-plugins-bad:rtmp=enabled -Dgst-plugins-bad:rtmp2=enabled  \
     -D optimization=3 -D b_lto=true
 
 WORKDIR /build
@@ -42,7 +42,7 @@ FROM ubuntu:24.04 AS base
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # VAAPI via DRM
-    libva2 libva-drm2 libudev1 \
+    libva2 libva-drm2 libudev1 librtmp1 libexpat1 \
     # Generic dependencies
     openssl
 
