@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: EUPL-1.2
 
-FROM ubuntu:24.04 AS builder
+FROM ubuntu:26.04 AS builder
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y --no-install-recommends git ca-certificates && update-ca-certificates
@@ -38,7 +38,7 @@ RUN DESTDIR=/gstreamer-install ninja install
 
 # ==== Base production image
 
-FROM ubuntu:24.04 AS base
+FROM ubuntu:26.04 AS base
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # VAAPI via DRM
