@@ -18,7 +18,7 @@ RUN apt-get install -y \
     libva-dev libdrm-dev libudev-dev
 
 RUN python3 -m venv /pyenv
-RUN /pyenv/bin/pip3 install meson setuptools    
+RUN /pyenv/bin/pip3 install meson setuptools
 
 WORKDIR /gstreamer
 
@@ -53,7 +53,7 @@ COPY --from=builder /gstreamer-install/ /
 # ==== With intel drivers
 
 FROM base AS intel
-RUN apt-get install -y --no-install-recommends intel-media-va-driver 
+RUN apt-get install -y --no-install-recommends intel-media-va-driver
 
 # ==== With nvidia drivers
 
