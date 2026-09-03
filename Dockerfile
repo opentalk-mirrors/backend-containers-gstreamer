@@ -22,7 +22,7 @@ RUN /pyenv/bin/pip3 install meson setuptools
 
 WORKDIR /gstreamer
 
-ARG GSTREAMER_CHECKOUT=1.24
+ARG GSTREAMER_CHECKOUT=1.26
 RUN git checkout $GSTREAMER_CHECKOUT
 
 RUN /pyenv/bin/meson setup /build/ \
