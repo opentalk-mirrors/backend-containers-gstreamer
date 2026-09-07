@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: EUPL-1.2
 
-FROM ubuntu:24.04 AS builder
+FROM ubuntu:26.04 AS builder
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y --no-install-recommends git ca-certificates && update-ca-certificates
@@ -18,11 +18,11 @@ RUN apt-get install -y \
     libva-dev libdrm-dev libudev-dev
 
 RUN python3 -m venv /pyenv
-RUN /pyenv/bin/pip3 install meson setuptools    
+RUN /pyenv/bin/pip3 install meson setuptools
 
 WORKDIR /gstreamer
 
-ARG GSTREAMER_CHECKOUT=1.24
+ARG GSTREAMER_CHECKOUT=1.26
 RUN git checkout $GSTREAMER_CHECKOUT
 
 RUN /pyenv/bin/meson setup /build/ \
@@ -38,7 +38,7 @@ RUN DESTDIR=/gstreamer-install ninja install
 
 # ==== Base production image
 
-FROM ubuntu:24.04 AS base
+FROM ubuntu:26.04 AS base
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # VAAPI via DRM
@@ -53,7 +53,7 @@ COPY --from=builder /gstreamer-install/ /
 # ==== With intel drivers
 
 FROM base AS intel
-RUN apt-get install -y --no-install-recommends intel-media-va-driver 
+RUN apt-get install -y --no-install-recommends intel-media-va-driver
 
 # ==== With nvidia drivers
 
