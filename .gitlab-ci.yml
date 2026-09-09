@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: EUPL-1.2
 
 ---
-image: alpine:3.20
+image: alpine:3.24
 
 stages:
   - lint
